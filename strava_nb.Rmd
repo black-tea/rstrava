@@ -1,0 +1,36 @@
+---
+title: "My 2017 Strava Data"
+output: md_document
+---
+
+After seeing some tweets about Marcus Volz's [R Strava package](https://github.com/marcusvolz/strava/)(and some interesting run visualizations), I decided I wanted to give it a try for my 2017 activity data. This is perfect timing since this is the first year I've been pretty consistent uploading my bike/run data.
+
+I began with the same steps from Marcus' github page to get your bulk strava data:
+
+### Bulk Export from Strava
+1. Log in to Strava
+2. Select "Settings" from the main drop-down menu at top right of the screen
+3. Select "Download all your activities" from lower right of screen
+4. Wait for an email to be sent
+5. Click the link in email to download zipped folder containing activities
+6. Unzip files
+
+### Install packages
+```{r}
+install.packages(c("devtools", "mapproj", "tidyverse"))
+devtools::install_github("marcusvolz/strava")
+```
+
+### Load packages
+```{r}
+library(strava)
+library(tidyverse)
+```
+
+### Prep Data
+Since I am interested in 2017 data, I'm going to start by trimming the data to just last year. The `process_data` function converts the list of .gpx files into a dataframe. 
+```{r}
+data <- process_data(<gpx file path>)
+glimpse(data)
+```
+
